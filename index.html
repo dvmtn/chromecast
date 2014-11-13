@@ -1,1 +1,38 @@
-<h1>Hello World!</h1>
+<html>
+    <head>
+        <style>
+        *{
+          margin:0;
+          padding:0;
+          font-family:sans-serif;
+          font-weight:lighter;
+        }
+        </style>
+    </head>
+<body>
+    <div class="messages">
+        <h1>Waiting for Messages...</h1>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
+<script src="messageTypes.js"></script>
+<script>
+    $(function() {
+        var receiver = new cast.receiver.Receiver('51F2093F', ['dev_mountain']),
+            channelHandler = new cast.receiver.ChannelHandler('dev_mountain'),
+            $messages = $('.messages');
+
+        channelHandler.addChannelFactory(
+            receiver.createChannelFactory('dev_mountain'));
+
+        receiver.start();
+
+        channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
+
+        function onMessage(event) {
+            $messages.html(event.message.type);
+        }
+    });
+</script>
+</html>
