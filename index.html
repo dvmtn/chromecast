@@ -19,11 +19,20 @@
         font-family:Verdana, Geneva, sans-serif;
         font-size:40px;
       }
+      span#blob{
+        width: 40px;
+        height: 40px;
+        top:40px;
+        left:0;
+        border-radius: 20px;
+        position:absolute;
+      }
     </style>
     <title>Cast Hello Text</title>
   </head>
   <body>
     <div id="message">Talk to me</div>
+    <span id="blob"></span>
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript">
       window.onload = function() {
@@ -76,10 +85,17 @@
         window.castReceiverManager.start({statusText: "Application is starting"});
         console.log('Receiver Manager started');
       };
-
+      var left_margin = 0;
       // utility function to display the text message in the input field
       function displayText(text) {
         console.log(text);
+        if(text === "left"){
+          left_margin -= 40;
+        }
+        if(text === "right"){
+          left_margin += 40;
+        }
+        document.getElementById("blob").style.left = left_margin + 'px';
         document.getElementById("message").innerHTML=text;
         window.castReceiverManager.setApplicationState(text);
       };
