@@ -54,29 +54,30 @@ window.addEventListener('load',function() {
   }
 }, false);
 
-var x = 40;
+var x = 50;
 var y = 50;
 // utility function to display the text message in the input field
 function displayText(text) {
   if(text === "left"){
-    x -= 40;
+    x -= 1;
   }
 
   if(text === "right"){
-    x += 40;
+    x += 1;
   }
 
   if(text === "up"){
-    y -= 5;
+    y -= 1;
   }
 
   if(text === "down"){
-    y += 5;
+    y += 1;
   }
 
-  document.getElementById("blob").style.left = x + 'px';
-  document.getElementById("blob").style.top = y + 'px';
+  document.getElementById("blob").style.left = x + '%';
+  document.getElementById("blob").style.top = y + '%';
+  document.body.style.backgroundColor = "hsl(" + (x * 3.6) + ", " + y + "%,60%)";
 
-  document.getElementById("message").innerHTML=text;
+  //document.getElementById("message").innerHTML= x + "_" + y;
   window.castReceiverManager.setApplicationState(text);
 }
