@@ -54,17 +54,29 @@ window.addEventListener('load',function() {
   }
 }, false);
 
-var left_margin = 40;
+var x = 40;
+var y = 50;
 // utility function to display the text message in the input field
 function displayText(text) {
-  console.log(text);
   if(text === "left"){
-    left_margin -= 40;
+    x -= 40;
   }
+
   if(text === "right"){
-    left_margin += 40;
+    x += 40;
   }
-  document.getElementById("blob").style.left = left_margin + 'px';
+
+  if(text === "up"){
+    y -= 5;
+  }
+
+  if(text === "down"){
+    y += 5;
+  }
+
+  document.getElementById("blob").style.left = x + 'px';
+  document.getElementById("blob").style.top = y + 'px';
+
   document.getElementById("message").innerHTML=text;
   window.castReceiverManager.setApplicationState(text);
 }
