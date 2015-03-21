@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener('load',function() {
   if(window.cast){
     cast.receiver.logger.setLevelValue(0);
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
@@ -19,15 +19,15 @@ window.onload = function() {
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
-      if (window.castReceiverManager.getSenders().length == 0) {
+      if (window.castReceiverManager.getSenders().length === 0) {
         window.close();
       }
     };
 
     // handler for 'systemvolumechanged' event
     castReceiverManager.onSystemVolumeChanged = function(event) {
-      console.log('Received System Volume Changed event: ' + event.data['level'] + ' ' +
-                  event.data['muted']);
+      console.log('Received System Volume Changed event: ' + event.data.level + ' ' +
+                  event.data.muted);
     };
 
     // create a CastMessageBus to handle messages for a custom namespace
@@ -43,7 +43,7 @@ window.onload = function() {
       // inform all senders on the CastMessageBus of the incoming message event
       // sender message listener will be invoked
       window.messageBus.send(event.senderId, event.data);
-    }
+    };
 
     // initialize the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Application is starting"});
@@ -51,7 +51,7 @@ window.onload = function() {
   }else{
     alert("This app is designed to be served via chromecast, it won't work in a normal browser! Sorry!");
   }
-};
+}, false);
 
 var left_margin = 0;
 // utility function to display the text message in the input field
@@ -66,4 +66,4 @@ function displayText(text) {
   document.getElementById("blob").style.left = left_margin + 'px';
   document.getElementById("message").innerHTML=text;
   window.castReceiverManager.setApplicationState(text);
-};
+}
