@@ -12,6 +12,7 @@ window.addEventListener('load',function() {
 
     // handler for 'senderconnected' event
     castReceiverManager.onSenderConnected = function(event) {
+      displayText(window.innerWidth + ' x ' + window.innerHeight);
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
     };
@@ -53,7 +54,7 @@ window.addEventListener('load',function() {
   }
 }, false);
 
-var left_margin = 0;
+var left_margin = 40;
 // utility function to display the text message in the input field
 function displayText(text) {
   console.log(text);
