@@ -175,9 +175,9 @@ function displayText(text) {
   }
 
   document.getElementById("blob").style.left = x + 'px';
-  document.getElementById("blob").style.top = y + 'px';
+  document.getElementById("blob").style.top = y + '%';
 
-  document.getElementById("message").innerHTML=text;
+  document.getElementById("message").innerHTML= x + "_" + y;
   window.castReceiverManager.setApplicationState(text);
 }
 
